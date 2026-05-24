@@ -46,9 +46,11 @@ export function AetherisHero({ theme }: HeroProps) {
         </span>
       </div>
 
-      {/* Headline Title pairing elegant serif and giant tech display sans */}
-      <h1 className="max-w-4xl text-4xl sm:text-6xl md:text-7.5xl font-display font-bold tracking-tight leading-[1.05] text-white uppercase">
-        The future of <span className={`font-cinzel tracking-wider font-bold ${getThemeText(theme)}`}>Quantum Synthesis</span> in a single interface.
+      {/* Headline Title pairing Archivo Black and Cinzel font */}
+      <h1 className="max-w-5xl text-4xl sm:text-6xl md:text-7xl font-archivo leading-[1.15] tracking-tight text-white uppercase">
+        The future of <br />
+        <span className={`font-cinzel tracking-wider font-bold ${getThemeText(theme)}`}>Quantum Synthesis</span> <br />
+        in a single interface
       </h1>
 
       {/* Description Meta Section */}
