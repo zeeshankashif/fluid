@@ -1,0 +1,6 @@
+{
+  "name": "Bento AI Landing Page",
+  "description": "An interactive, high-fidelity bento-box grid landing page for a futuristic AI tool with smooth scroll, GSAP staggered entrance animations, and subtle 3D mouse hover parallax gravity effects.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
