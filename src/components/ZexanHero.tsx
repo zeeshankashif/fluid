@@ -10,7 +10,7 @@ interface HeroProps {
   theme: ThemeType;
 }
 
-export function AetherisHero({ theme }: HeroProps) {
+export function ZexanHero({ theme }: HeroProps) {
   const getThemeText = (theme: ThemeType) => {
     switch (theme) {
       case "prime":
@@ -60,7 +60,7 @@ export function AetherisHero({ theme }: HeroProps) {
         </div>
         <div>
           <p className="font-sans text-base md:text-lg font-light tracking-wide text-gray-400 leading-relaxed">
-            Ætheris coordinates highly parallel micro-models, generative neural grids, and ambient entropy fields into a bespoke physical bento configuration. Hover to interact, customize node factors, and trigger cognitive core prompts.
+            ZEXAN coordinates highly parallel micro-models, generative neural grids, and ambient entropy fields into a bespoke physical bento configuration. Hover to interact, customize node factors, and trigger cognitive core prompts.
           </p>
           <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
             <span className="font-mono text-[10px] text-gray-500 tracking-wider">

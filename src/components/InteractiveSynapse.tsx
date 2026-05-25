@@ -237,7 +237,7 @@ export function InteractiveSynapse({ theme, complexity }: InteractiveSynapseProp
           <span className="text-gray-500 font-mono text-[9px] uppercase tracking-wider">REGIONAL_INTEGRITY</span>
           <div className="flex items-center gap-1">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-            <span className="font-mono text-[9px] text-emerald-400 uppercase">AETHERIS_NOMINAL</span>
+            <span className="font-mono text-[9px] text-emerald-400 uppercase">ZEXAN_NOMINAL</span>
           </div>
         </div>
       </div>

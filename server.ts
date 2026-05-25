@@ -33,7 +33,7 @@ function getAiClient() {
   return aiClient;
 }
 
-// REST API for Aetheris Cognitive Oracle
+// REST API for Zexan Cognitive Oracle
 app.post("/api/oracle", async (req, res) => {
   try {
     const { prompt, currentTheme, speed, complexity } = req.body;
@@ -46,7 +46,7 @@ app.post("/api/oracle", async (req, res) => {
           `💡 [Simulation Engine Active] Synaptic networks are operating at nominal capacity. Recalibrating flux harmonics inside the "${currentTheme || 'prime'}" stream at rate ${speed || '1.0'}x. Current cognitive density: ${complexity || '0.5'}.`,
           `✨ [Simulated Oracle] Realigned neural pathways. Recommended system correction: upgrade quantum core bandwidth to prevent latency variance.`,
           `🌌 [Temporal Prediction] Holographic diagnostics indicate zero-vulnerability across aether interfaces. Synapses are successfully routing complex mesh protocols.`,
-          `💡 [Holographic Core] System parameters approved. Aetheris suggests adjusting simulation complexity to stimulate higher synaptic refraction lines.`
+          `💡 [Holographic Core] System parameters approved. ZEXAN suggests adjusting simulation complexity to stimulate higher synaptic refraction lines.`
         ];
         const randomAnswer = fallbackAnswers[Math.floor(Math.random() * fallbackAnswers.length)];
         return res.json({ text: randomAnswer, isSimulation: true });
@@ -54,8 +54,8 @@ app.post("/api/oracle", async (req, res) => {
       return;
     }
 
-    const systemPrompt = `You are the Aetheris Intellectual Cognitive Engine, a premium, dark-themed cybernetic cosmic intelligence powering an ultra-luxury landing page. 
-    The user is querying you through the Aetheris Bento Grid terminal. 
+    const systemPrompt = `You are the ZEXAN Intellectual Cognitive Engine, a premium, dark-themed cybernetic cosmic intelligence powering an ultra-luxury landing page. 
+    The user is querying you through the Zexan Bento Grid terminal. 
     Current state values of the landing page:
     - active-theme: ${currentTheme || 'prime'}
     - simulation-speed: ${speed || '1.0'}x
@@ -105,7 +105,7 @@ async function startup() {
   }
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`🚀 Aetheris full-stack server running on http://0.0.0.0:${PORT}`);
+    console.log(`🚀 Zexan full-stack server running on http://0.0.0.0:${PORT}`);
   });
 }
 

@@ -12,7 +12,7 @@ interface HeaderProps {
   setTheme: (t: ThemeType) => void;
 }
 
-export function AetherisHeader({ activeTheme, setTheme }: HeaderProps) {
+export function ZexanHeader({ activeTheme, setTheme }: HeaderProps) {
   const [time, setTime] = useState("");
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export function AetherisHeader({ activeTheme, setTheme }: HeaderProps) {
               : "bg-gradient-to-r from-amber-400 to-orange-500"
           }`} />
           <div className="relative px-4 py-1.5 bg-black rounded-lg leading-none border border-white/10 flex items-center justify-center">
-            <span className="font-display font-semibold tracking-wider text-white text-lg">ÆTHERIS</span>
+            <span className="font-archivo tracking-wider text-white text-lg">ZEXAN</span>
           </div>
         </div>
         <div className="hidden lg:flex flex-col text-left">

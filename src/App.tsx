@@ -11,8 +11,8 @@ import Lenis from "lenis";
 import { ThemeType } from "./types";
 
 // Import custom high-fidelity bento widgets
-import { AetherisHeader } from "./components/AetherisHeader";
-import { AetherisHero } from "./components/AetherisHero";
+import { ZexanHeader } from "./components/ZexanHeader";
+import { ZexanHero } from "./components/ZexanHero";
 import { BentoCard } from "./components/BentoCard";
 import { InteractiveCore } from "./components/InteractiveCore";
 import { InteractiveSynapse } from "./components/InteractiveSynapse";
@@ -193,7 +193,7 @@ export default function App() {
             {/* Pulsing visual tag */}
             <div className="flex items-center gap-2 px-3 py-1 bg-white/[0.02] border border-white/5 rounded-full backdrop-blur-sm">
               <span className={`w-1.5 h-1.5 rounded-full animate-ping ${theme === "cyan" ? "bg-cyan-500" : theme === "solar" ? "bg-amber-500" : "bg-purple-500"}`}></span>
-              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-zinc-400">Aetheris Synthesis Active</span>
+              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-zinc-400">Zexan Synthesis Active</span>
             </div>
 
             {/* Giant Graphic Percentage Number */}
@@ -215,7 +215,7 @@ export default function App() {
               {loadingProgress < 25 && "Loading Boot Blocks & Drivers..."}
               {loadingProgress >= 25 && loadingProgress < 50 && "> Synapse Connection Lines Stabilized"}
               {loadingProgress >= 50 && loadingProgress < 75 && "> Quantum Coupling Synchronizer: Synchronized"}
-              {loadingProgress >= 75 && loadingProgress < 100 && "> Engaging Aetheris Cognition Layer..."}
+              {loadingProgress >= 75 && loadingProgress < 100 && "> Engaging Zexan Cognition Layer..."}
               {loadingProgress === 100 && "Initialization Transmissions Nominal ✔"}
             </div>
           </div>
@@ -231,7 +231,7 @@ export default function App() {
 
       {/* Header element */}
       <div className="hero-item opacity-0">
-        <AetherisHeader activeTheme={theme} setTheme={setTheme} />
+        <ZexanHeader activeTheme={theme} setTheme={setTheme} />
       </div>
 
       <main className="relative z-10 flex-grow py-6 pb-20">
@@ -245,7 +245,7 @@ export default function App() {
 
         {/* Hero Title & Subtext Section */}
         <div className="hero-item opacity-0">
-          <AetherisHero theme={theme} />
+          <ZexanHero theme={theme} />
         </div>
 
         {/* Dynamic Bento Box Grid Segment */}
@@ -358,7 +358,7 @@ export default function App() {
 
       {/* Footer minimal info logs */}
       <footer className="w-full border-t border-white/5 py-6 px-6 md:px-12 flex flex-col sm:flex-row items-center justify-between gap-3 text-gray-500 font-mono text-[9.5px]">
-        <span>&copy; 2026 AETHERIS COGNITIVE SYSTEMS. ALL WORKSPACE SYNTHESIS RESERVED.</span>
+        <span>&copy; 2026 ZEXAN COGNITIVE SYSTEMS. ALL WORKSPACE SYNTHESIS RESERVED.</span>
         <div className="flex gap-4">
           <span className="hover:text-gray-300 transition cursor-pointer">[ COMPLIANCE_SECURE ]</span>
           <span className="hover:text-gray-300 transition cursor-pointer">[ PRIVACY_KEY_LOG ]</span>

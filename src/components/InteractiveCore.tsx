@@ -15,7 +15,7 @@ interface InteractiveCoreProps {
 export function InteractiveCore({ theme, simulationSpeed }: InteractiveCoreProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [consoleLogs, setConsoleLogs] = useState<string[]>([
-    "SYS_INIT: Bootstrapping Aetheris neural core...",
+    "SYS_INIT: Bootstrapping Zexan neural core...",
     "SYS_INIT: Binding spatial mesh index keys...",
     "CORE_STABLE // Node network: Standby.",
   ]);
@@ -262,8 +262,8 @@ export function InteractiveCore({ theme, simulationSpeed }: InteractiveCoreProps
           <canvas ref={canvasRef} className="absolute inset-0 w-full h-full cursor-crosshair z-10" />
           {/* Centered vector text */}
           <div className="absolute flex flex-col items-center justify-center pointer-events-none text-center select-none z-0">
-            <span className="font-display text-[9px] tracking-[0.3em] text-gray-500 uppercase">AETHERIS ACTIVE</span>
-            <span className="font-mono text-[16px] tracking-widest text-white/10 mt-1 font-semibold">Æ-CORE</span>
+            <span className="font-display text-[9px] tracking-[0.3em] text-gray-500 uppercase">ZEXAN ACTIVE</span>
+            <span className="font-mono text-[16px] tracking-widest text-white/10 mt-1 font-semibold">ZX-CORE</span>
           </div>
         </div>
 

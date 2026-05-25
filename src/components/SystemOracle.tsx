@@ -34,7 +34,7 @@ const PRESET_COMMANDS = [
 
 export function SystemOracle({ theme, speed, complexity }: SystemOracleProps) {
   const [query, setQuery] = useState("");
-  const [output, setOutput] = useState("AETHERIS COGNITIVE ARRAY STANDBY. SUBMIT QUERY TO ACTIVATE COGNITION LINK.");
+  const [output, setOutput] = useState("ZEXAN COGNITIVE ARRAY STANDBY. SUBMIT QUERY TO ACTIVATE COGNITION LINK.");
   const [displayedOutput, setDisplayedOutput] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedPreset, setSelectedPreset] = useState<string | null>(null);
@@ -101,7 +101,7 @@ export function SystemOracle({ theme, speed, complexity }: SystemOracleProps) {
       setOutput(data.text);
     } catch (err: any) {
       console.error(err);
-      setOutput("⚠️ DIRECT_TRANSMISSION_ERROR: Network loop decoupled. Default simulator fallback initialized. [Aetheris offline]");
+      setOutput("⚠️ DIRECT_TRANSMISSION_ERROR: Network loop decoupled. Default simulator fallback initialized. [Zexan offline]");
     } finally {
       setLoading(false);
     }
@@ -152,7 +152,7 @@ export function SystemOracle({ theme, speed, complexity }: SystemOracleProps) {
         <div className="flex items-center gap-2">
           <Terminal className={`w-4 h-4 ${c.text}`} />
           <h3 className="font-mono text-xs uppercase tracking-widest font-semibold text-zinc-200">
-            Aetheris Oracle Terminal
+            Zexan Oracle Terminal
           </h3>
         </div>
         <div className="flex items-center gap-1.5 font-mono text-[9px]">
@@ -193,7 +193,7 @@ export function SystemOracle({ theme, speed, complexity }: SystemOracleProps) {
         <div className="absolute inset-0 bg-scanlines pointer-events-none opacity-25"></div>
         <div ref={terminalScrollRef} className="flex-grow overflow-y-auto pr-1 flex flex-col max-h-[180px]">
           <div className="flex items-center gap-2 mb-2 text-zinc-600 border-b border-white/5 pb-1 select-none text-[9px]">
-            <span>[SOURCE: AETHERIS.COGNITIVE.LAYER]</span>
+            <span>[SOURCE: ZEXAN.COGNITIVE.LAYER]</span>
             {isSimulated ? (
               <span className="text-amber-500/80">[SIMULATION ENGINE TYPE]</span>
             ) : (
@@ -226,7 +226,7 @@ export function SystemOracle({ theme, speed, complexity }: SystemOracleProps) {
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Command Aetheris Intellectual Core..."
+          placeholder="Command Zexan Intellectual Core..."
           className={`flex-grow bg-zinc-950/70 border border-white/10 rounded-xl px-3 py-2 text-[11px] font-mono text-zinc-100 placeholder-zinc-600 outline-none transition duration-300 ${c.inputBg}`}
         />
         <button
