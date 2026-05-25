@@ -34,34 +34,15 @@ export default function App() {
   const [simulationSpeed, setSimulationSpeed] = useState(1.0);
   const [synapseComplexity, setSynapseComplexity] = useState(0.5);
 
-  // 1. Initialize Lenis Smooth Scroll Engine
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-      orientation: "vertical",
-      gestureOrientation: "vertical",
-      smoothWheel: true,
-    });
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [showPreloader, setShowPreloader] = useState(true);
+  const [scrollPercent, setScrollPercent] = useState(0);
 
-    const raf = (time: number) => {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    };
-
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
-
-  // 2. Buttery Smooth GSAP Staggered Entrance of Bento Cards
-  useEffect(() => {
+  // Buttery Smooth GSAP Staggered Entrance of Bento Cards (called post-preloading)
+  const triggerEntranceAnim = () => {
     const cards = document.querySelectorAll(".bento-item");
     const heroElements = document.querySelectorAll(".hero-item");
 
-    // Create a unified master page load timeline
     const tl = gsap.timeline();
 
     tl.fromTo(
@@ -88,6 +69,87 @@ export default function App() {
       },
       "-=0.7"
     );
+  };
+
+  // 1. Initialize Lenis Smooth Scroll Engine
+  useEffect(() => {
+    // Reset browser scroll history and current scroll immediately to the very top
+    window.scrollTo(0, 0);
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+    });
+
+    lenis.scrollTo(0, { immediate: true });
+
+    const raf = (time: number) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
+  // 2. Simulated Premium Luxury Preloader Timing
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    let currentProgress = 0;
+    
+    const interval = setInterval(() => {
+      const increment = Math.floor(Math.random() * 6) + 2; // Jump values
+      currentProgress = Math.min(currentProgress + increment, 100);
+      setLoadingProgress(currentProgress);
+
+      if (currentProgress >= 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          gsap.to(".preloader-container", {
+            opacity: 0,
+            scale: 0.98,
+            duration: 0.8,
+            ease: "power3.inOut",
+            onComplete: () => {
+              setShowPreloader(false);
+              // Ensure website starts at the absolute top as content opens
+              window.scrollTo(0, 0);
+              triggerEntranceAnim();
+            }
+          });
+        }, 400);
+      }
+    }, 80); // Smooth percentage stream
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // 3. Track scroll progress
+  useEffect(() => {
+    const handleScroll = () => {
+      const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (windowHeight <= 0) {
+        setScrollPercent(0);
+        return;
+      }
+      const scrollY = window.scrollY;
+      const progress = (scrollY / windowHeight) * 100;
+      setScrollPercent(Math.min(Math.max(progress, 0), 100));
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const getThemeAura = (t: ThemeType) => {
@@ -101,8 +163,65 @@ export default function App() {
     }
   };
 
+  const getThemeHighlight = (t: ThemeType) => {
+    switch (t) {
+      case "cyan":
+        return "bg-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.8)]";
+      case "solar":
+        return "bg-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.8)]";
+      case "prime":
+      default:
+        return "bg-[#bd00ff] shadow-[0_0_15px_rgba(189,0,255,0.8)]";
+    }
+  };
+
   return (
     <div className={`min-h-screen bg-luxury-bg text-gray-100 flex flex-col font-sans transition-all duration-700 select-none glow-grid-ambient relative overflow-x-hidden`}>
+      {/* Sleek Dynamic Scroll Progress Bar */}
+      <div 
+        className={`fixed top-0 left-0 h-[3px] z-[999] transition-all duration-75 ${getThemeHighlight(theme)}`}
+        style={{ width: `${scrollPercent}%` }}
+      />
+
+      {/* Luxury Avant-Garde Preloader Overlay */}
+      {showPreloader && (
+        <div className="preloader-container fixed inset-0 z-[9999] bg-luxury-bg flex flex-col justify-center items-center select-none overflow-hidden">
+          {/* Subtle background luxury glow */}
+          <div className="absolute w-[450px] h-[450px] rounded-full bg-purple-600/5 blur-[120px] pointer-events-none animate-pulse"></div>
+          
+          <div className="flex flex-col items-center max-w-md w-full px-6 text-center space-y-6 z-10">
+            {/* Pulsing visual tag */}
+            <div className="flex items-center gap-2 px-3 py-1 bg-white/[0.02] border border-white/5 rounded-full backdrop-blur-sm">
+              <span className={`w-1.5 h-1.5 rounded-full animate-ping ${theme === "cyan" ? "bg-cyan-500" : theme === "solar" ? "bg-amber-500" : "bg-purple-500"}`}></span>
+              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-zinc-400">Aetheris Synthesis Active</span>
+            </div>
+
+            {/* Giant Graphic Percentage Number */}
+            <div className="font-archivo text-8xl md:text-9xl text-white tracking-tight leading-none select-none relative">
+              {loadingProgress}
+              <span className={`text-3xl md:text-4xl align-super ml-1 font-sans font-bold ${theme === "cyan" ? "text-cyan-400" : theme === "solar" ? "text-amber-400" : "text-purple-400"}`}>%</span>
+            </div>
+
+            {/* Luxury linear progress track */}
+            <div className="w-full h-[2px] bg-white/5 rounded-full overflow-hidden relative">
+              <div 
+                className={`h-full transition-all duration-100 ease-out ${getThemeHighlight(theme)}`}
+                style={{ width: `${loadingProgress}%` }}
+              ></div>
+            </div>
+
+            {/* Simulated terminal process streams */}
+            <div className="font-mono text-[9.5px] text-zinc-500 tracking-wider h-4 uppercase select-none">
+              {loadingProgress < 25 && "Loading Boot Blocks & Drivers..."}
+              {loadingProgress >= 25 && loadingProgress < 50 && "> Synapse Connection Lines Stabilized"}
+              {loadingProgress >= 50 && loadingProgress < 75 && "> Quantum Coupling Synchronizer: Synchronized"}
+              {loadingProgress >= 75 && loadingProgress < 100 && "> Engaging Aetheris Cognition Layer..."}
+              {loadingProgress === 100 && "Initialization Transmissions Nominal ✔"}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Immersive UI Atmospheric ambient spheres */}
       <div className="absolute top-[-200px] right-[-100px] w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
       <div className="absolute bottom-[-100px] left-[-100px] w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none z-0"></div>

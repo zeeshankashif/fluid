@@ -39,7 +39,7 @@ export function SystemOracle({ theme, speed, complexity }: SystemOracleProps) {
   const [loading, setLoading] = useState(false);
   const [selectedPreset, setSelectedPreset] = useState<string | null>(null);
   const [isSimulated, setIsSimulated] = useState(false);
-  const outputEndRef = useRef<HTMLDivElement>(null);
+  const terminalScrollRef = useRef<HTMLDivElement>(null);
 
   // Typewriter effect variables
   useEffect(() => {
@@ -59,9 +59,11 @@ export function SystemOracle({ theme, speed, complexity }: SystemOracleProps) {
     return () => clearInterval(timer);
   }, [output]);
 
-  // Scroll to bottom on response update
+  // Scroll to bottom of terminal content on response update (local scrolling only to prevent screen auto-scroll)
   useEffect(() => {
-    outputEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (terminalScrollRef.current) {
+      terminalScrollRef.current.scrollTop = terminalScrollRef.current.scrollHeight;
+    }
   }, [displayedOutput]);
 
   const handlePresetSelect = (presetId: string, prompt: string) => {
@@ -189,7 +191,7 @@ export function SystemOracle({ theme, speed, complexity }: SystemOracleProps) {
       {/* Display Terminal Output */}
       <div className={`my-3 flex-grow min-h-[140px] md:min-h-[150px] bg-zinc-950/50 border border-white/5 rounded-xl p-3 flex flex-col font-mono text-[11px] leading-relaxed relative overflow-hidden transition-all duration-300 ${c.glow}`}>
         <div className="absolute inset-0 bg-scanlines pointer-events-none opacity-25"></div>
-        <div className="flex-grow overflow-y-auto pr-1 flex flex-col max-h-[180px]">
+        <div ref={terminalScrollRef} className="flex-grow overflow-y-auto pr-1 flex flex-col max-h-[180px]">
           <div className="flex items-center gap-2 mb-2 text-zinc-600 border-b border-white/5 pb-1 select-none text-[9px]">
             <span>[SOURCE: AETHERIS.COGNITIVE.LAYER]</span>
             {isSimulated ? (
@@ -205,7 +207,6 @@ export function SystemOracle({ theme, speed, complexity }: SystemOracleProps) {
               <span className="inline-block ml-1 w-2 h-4 bg-zinc-400 animate-pulse"></span>
             )}
           </div>
-          <div ref={outputEndRef} />
         </div>
 
         {/* Loading overlay */}
